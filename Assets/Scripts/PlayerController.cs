@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
             BoardManager.CellData cellData = board.GetCellData(newCellTarget); //check if new position is passable and move there
 
             if (cellData != null && cellData.Passable) {
+                GameManager.Instance.TurnManager.Tick();
                 MoveTo(newCellTarget);
             }
         }
