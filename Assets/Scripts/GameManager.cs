@@ -35,9 +35,14 @@ public class GameManager : MonoBehaviour {
     }
 
     private void OnTurnHappen() {
-        foodAmount -= 1;
+        const int onTurnFoodChange = -1;
+        ChangeFood(onTurnFoodChange);
+    }
+
+    public void ChangeFood(int amount) {
+        foodAmount += amount;
         foodLabel.text = "Food: " + foodAmount;
     }
 
-    
+
 }

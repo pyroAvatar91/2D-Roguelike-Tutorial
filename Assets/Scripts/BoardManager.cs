@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class BoardManager : MonoBehaviour {
     public class CellData {
         public bool Passable;
-        public GameObject ContainedObject;
+        public CellObject ContainedObject;
     }
     
     private CellData[,] boardData;
@@ -19,7 +19,7 @@ public class BoardManager : MonoBehaviour {
     [SerializeField] private int levelHeight;
     [SerializeField] private Tile[] groundTiles; 
     [SerializeField] private Tile[] wallTiles;
-    [SerializeField] private GameObject foodPrefab;
+    [SerializeField] private FoodObject foodPrefab;
 
     public void Init() {
         tilemap = GetComponentInChildren<Tilemap>();
@@ -69,7 +69,7 @@ public class BoardManager : MonoBehaviour {
             
             emptyCellsList.RemoveAt(randomIndex);
             CellData cellData = boardData[coordinates.x, coordinates.y];
-            GameObject newFood = Instantiate(foodPrefab);
+            FoodObject newFood = Instantiate<FoodObject>(foodPrefab);
             newFood.transform.position = CellToWorld(coordinates);
             cellData.ContainedObject = newFood;
         }
