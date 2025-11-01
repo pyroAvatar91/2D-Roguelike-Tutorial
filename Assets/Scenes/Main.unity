@@ -477,6 +477,7 @@ MonoBehaviour:
   wallTiles:
   - {fileID: 11400000, guid: 4d104d1285c58ec09ae3e75d01e8f6d1, type: 2}
   foodPrefab: {fileID: 3331426948469202036, guid: 39e2a171a30d432b3ae22d359c985a6c, type: 3}
+  obstaclePrefab: {fileID: 0}
 --- !u!1 &1140391077
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class BoardManager : MonoBehaviour {
     [SerializeField] private Tile[] groundTiles; 
     [SerializeField] private Tile[] wallTiles;
     [SerializeField] private FoodObject foodPrefab;
+    [SerializeField] private ObstacleObject obstaclePrefab;
 
     public void Init() {
         tilemap = GetComponentInChildren<Tilemap>();
@@ -47,6 +48,7 @@ public class BoardManager : MonoBehaviour {
         }
         
         emptyCellsList.Remove(new Vector2Int(1, 1));
+        GenerateObstacle();
         GenerateFood();
     }
 
@@ -62,7 +64,7 @@ public class BoardManager : MonoBehaviour {
     }
 
     private void GenerateFood() {
-        int foodCount = 5;
+        int foodCount = Random.Range(3, 5);
         for (int i = 0; i < foodCount; ++i) {
             int randomIndex = Random.Range(0, emptyCellsList.Count);
             Vector2Int coordinates = emptyCellsList[randomIndex];
@@ -72,6 +74,20 @@ public class BoardManager : MonoBehaviour {
             FoodObject newFood = Instantiate<FoodObject>(foodPrefab);
             newFood.transform.position = CellToWorld(coordinates);
             cellData.ContainedObject = newFood;
+        }
+    }
+
+    private void GenerateObstacle() {
+        int obstaclecount = Random.Range(6, 10);
+        for (int i = 0; i < obstaclecount; ++i) {
+            int randomIndex = Random.Range(0, emptyCellsList.Count);
+            Vector2Int coordinates = emptyCellsList[randomIndex];
+
+            emptyCellsList.RemoveAt(randomIndex);
+            CellData cellData = boardData[coordinates.x, coordinates.y];
+            ObstacleObject newObstacle = Instantiate<ObstacleObject>(obstaclePrefab);
+            newObstacle.transform.position = CellToWorld(coordinates);
+            cellData.ContainedObject = newObstacle;
         }
     }
 
